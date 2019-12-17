@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<style>
+
+/* Listan sijainti */
+ul {
+	padding-top: 90px;
+	padding-left: 440px;
+	list-style-type:none;
+}
+/* bodyn taustaväri*/
+body {
+background-color:grey;
+}
+
+/* Listan tyylit */
+ul li {
+  position: relative;
+  padding: 20px 22px 20px 40px;
+  background: white;
+  font-size: 18px;
+  transition: 0.2s;
+  width: 60%;
+	text-align: center;
+}
+
+/* Joka toinen listan kohta erivärillä */
+ul li:nth-child(odd) {
+  background: lightblue;
+}
+
+/* Kun hiiri viedään listan päälle se listan kohta muuttaa väriä */
+ul li:hover {
+  background: red;
+}
+
+/* Koko divin ominaisuudet */
+#divi {
+  background-color: grey;
+  padding: 30px 40px;
+  color: black;
+  text-align: center;
+  height: 890px;
+  height: 100%;
+}
+
+/* Tekstikentän ominaisuudet */
+#tekstikenttä {
+  width: 300px;
+  padding: 10px;
+  font-size: 22px;
+}
+
+/* Lisää napin väri, sijainti jne*/
+#lisääNappi {
+	background: green;
+	color: black;
+	cursor: pointer;
+	font-size: 20px;
+	width: 15%;
+  padding: 10px;
+  margin-left: 25px;
+}
+/*Poista nappien väri, sijainti jne*/
+.suljeNappi{
+background: red;
+position: absolute;
+cursor: pointer;
+left: 730px;
+font-size: 20px;
+width: 9%;
+}
+	</style>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+	<script>
+/*Functio joka luo listalle li elementin painettaessa lisää painiketta.*/
+	function lisääListalle(){
+
+		/*Haetaan kirjoitettu teksti ja siirretään se li elementtiin*/
+		var teksti = $("#tekstikenttä").val();
+		var listaElementti = $("<li>" + teksti +"</li>");
+		$("#lista").slideUp().fadeIn(666);
+
+		/*Tarkistetaan ettei teksti ollut tyhjä*/
+		if (teksti === '') {
+		alert("Et voi lisätä tyhjää tehtävää");
+		}
+		else {
+
+			/*Mikäli tekstiä oli lisätään tehtävä listalle */
+		$("#lista").append(listaElementti);
+		$("#tekstikenttä").val("");
+
+		/* Klikkaamalla toteutetaan poisto metodi */
+		$("li").click(poisto);
+			}
+};
+	/* Poisto metodi joka fadeouttaa listasta klikattavan elementin ja poistaa sen */
+function poisto(e) {
+	$(this).fadeOut("666", function() {
+        $(this).remove();});
+};
+
+	</script>
+	</head>
+	<body onload="updateData();">
+		<div id="divi">
+		<h1>Juhan to do list</h1>
+
+		<input type="text" id="tekstikenttä" placeholder="Anna tehtävä">
+		<span onclick="lisääListalle()" id="lisääNappi">Lisää</span>
+		<ul id = "lista">
+
+		</ul>
+		</div>
+	</body>
+</html>
